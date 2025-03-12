@@ -4,6 +4,6 @@
 /.idea/
 /cache/
 Dockerfile
-compose.yaml
+docker-compose.yaml
 compose.override.yaml
 README.md

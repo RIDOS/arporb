@@ -41,6 +41,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Копируем кастомные настройки PHP
 COPY infra/php/custom.ini /usr/local/etc/php/conf.d/custom.ini
 COPY infra/files/extensions.sh /usr/local/bin/extensions.sh
+COPY infra/files/entrypoint.sh /usr/local/bin/migrations.sh
 
 # Даем права на выполнение и запускаем установку расширений
 RUN chmod +x /usr/local/bin/extensions.sh && /usr/local/bin/extensions.sh

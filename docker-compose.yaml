@@ -12,8 +12,11 @@ services:
       - database_data:/var/lib/postgresql/data:rw
     networks:
       - backend
-    ports:
-      - "15432:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}" ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
 
   redis:
     container_name: redis
@@ -41,7 +44,9 @@ services:
     networks:
       - backend
     depends_on:
-      - database
+      database:
+        condition: service_healthy
+    entrypoint: ['/app/infra/files/entrypoint.sh']
 
   nginx:
     container_name: nginx
