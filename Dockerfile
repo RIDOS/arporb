@@ -12,10 +12,10 @@ RUN apt-get update && apt-get install -y unzip git curl libpq-dev \
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Копируем composer файлы
-COPY composer.lock composer.json ./
+COPY composer.json ./
 
 # Устанавливаем зависимости
-RUN composer install --no-dev --prefer-dist --no-scripts --no-progress --no-interaction
+RUN composer install --prefer-dist --no-scripts --no-progress --no-interaction
 
 # Копируем код приложения
 COPY . .
@@ -37,7 +37,7 @@ RUN apt-get update && apt-get install -y libpq-dev
 
 # Копируем кастомные настройки PHP
 COPY infra/php/custom.ini /usr/local/etc/php/conf.d/custom.ini
-COPY infra/php/extensions.sh /usr/local/bin/extensions.sh
+COPY infra/files/extensions.sh /usr/local/bin/extensions.sh
 
 # Даем права на выполнение и запускаем установку расширений
 RUN chmod +x /usr/local/bin/extensions.sh && /usr/local/bin/extensions.sh
