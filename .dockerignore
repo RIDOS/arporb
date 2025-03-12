@@ -1,0 +1,9 @@
+/vendor/
+/.git/
+/var/
+/.idea/
+/cache/
+Dockerfile
+compose.yaml
+compose.override.yaml
+README.md

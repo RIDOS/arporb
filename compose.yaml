@@ -12,6 +12,8 @@ services:
       - database_data:/var/lib/postgresql/data:rw
     networks:
       - backend
+    ports:
+      - "15432:5432"
 
   redis:
     container_name: redis
@@ -35,8 +37,11 @@ services:
       dockerfile: Dockerfile
     volumes:
       - .:/app
+      - /app/vendor
     networks:
       - backend
+    depends_on:
+      - database
 
   nginx:
     container_name: nginx
