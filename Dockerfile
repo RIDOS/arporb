@@ -35,6 +35,9 @@ COPY . .
 # Устанавливаем PostgreSQL dev-пакеты перед запуском расширений
 RUN apt-get update && apt-get install -y libpq-dev
 
+# Устанавливаем Composer в финальном контейнере
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
 # Копируем кастомные настройки PHP
 COPY infra/php/custom.ini /usr/local/etc/php/conf.d/custom.ini
 COPY infra/files/extensions.sh /usr/local/bin/extensions.sh
